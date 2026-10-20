@@ -936,6 +936,34 @@ figure.exhibit .read-btn{margin-top:14px}
 .map-foot h3{color:#2F2B23}
 .map-foot p{color:#574F3E}
 .map-foot p b{color:#2F2B23}
+
+/* ================= WORKSHEET PENCIL FLAGS =================
+   A small paper flag pinned to the wall at the exact stop where a
+   worksheet blank's answer appears: pencil icon, the worksheet
+   section, and the blank's name. Paper colors are fixed so the
+   flag reads on every gallery's wall paint, dark or light. */
+.ws-flags{display:flex; flex-direction:column; gap:7px; margin:14px 0}
+.ws-flag{display:flex; align-items:flex-start; gap:9px; padding:8px 12px; background:#FBF6E9; color:#3B2D18; border:1px solid #C9B98A; border-left:4px solid #B4531D; border-radius:3px; box-shadow:0 4px 10px rgba(10,6,2,.16); font-family:var(--font-s); font-size:12.5px; line-height:1.45; max-width:580px}
+.ws-flag svg{width:15px; height:15px; flex:none; color:#A34A16; margin-top:2px}
+.ws-flag b{font-weight:800; letter-spacing:.03em}
+.ws-flag .wf-blank{font-family:var(--font-d); font-style:italic; font-size:14.5px; font-weight:600; color:#2C2110}
+.beat .ws-flags{max-width:560px; margin:20px auto 0; text-align:left}
+.stele-reveal .ws-flags{max-width:640px; margin:20px auto 0}
+/* ================= BEFORE YOU WALK ON — the doorway mirror =================
+   At the end of every gallery, a panel mirrors what should be
+   filled in on the paper worksheet by that point. A mirror, not
+   a gate: nothing is checked and the doorway stays open. */
+.walk-on{margin:28px 0 8px; background:var(--panel); border:1px solid var(--line2); border-top:4px solid var(--clay); padding:22px 24px; box-shadow:0 10px 22px rgba(20,14,2,.12)}
+.walk-on h3{font-family:var(--font-c); font-weight:700; font-size:21px; letter-spacing:.02em; margin:0 0 6px; color:var(--sand)}
+.walk-on .wo-intro{margin:0; color:var(--sand2); font-size:15.5px; line-height:1.6}
+.walk-on .wo-sec{font-family:var(--font-s); font-size:11.5px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--clay); margin:16px 0 2px}
+.walk-on .wo-list{list-style:none; margin:0; padding:0}
+.walk-on .wo-list li{display:flex; gap:9px; align-items:flex-start; padding:7px 0; border-top:1px solid var(--line); font-size:15.5px; line-height:1.5; color:var(--sand)}
+.walk-on .wo-list li svg{width:15px; height:15px; flex:none; margin-top:4px; color:var(--clay)}
+.walk-on .wo-list .wo-note-inline{display:block; font-size:13.5px; color:var(--dim); margin-top:2px; line-height:1.5}
+.walk-on .wo-back{margin:14px 0 0; font-size:14px; font-style:italic; color:var(--dim); line-height:1.55}
+/* the entrance-hall note under the buttons, naming where you left off */
+.resume-note{margin:16px 0 0; font-family:var(--font-s); font-size:13.5px; font-weight:600; line-height:1.55; color:#6E6450; max-width:560px}
 </style>
 </head>
 <body>
@@ -1006,10 +1034,12 @@ figure.exhibit .read-btn{margin-top:14px}
           </div>
           <div class="intro-ctas">
             <button class="btn btn-gold" id="btn-begin">Begin the Visit <svg><use href="#i-arrow"/></svg></button>
+            <button class="btn btn-gold hidden" id="btn-resume" type="button"></button>
             <button class="btn btn-ghost" id="btn-how" aria-expanded="false" aria-controls="how-panel">How this works</button>
           </div>
+          <p class="resume-note hidden" id="resume-note"></p>
           <div class="how-note hidden" id="how-panel">
-          <p><b>How this works.</b> You are visiting a museum, one gallery at a time. Use the floor-plan strip at the top to see where you are. In each gallery, just <b>scroll down</b> — the wall text and the objects appear in order, stop by stop, like walking a real gallery. Read the wall text, look closely at the objects, and when a <b>Worksheet Moment</b> appears, write on your paper worksheet in the section it names. At the bottom of every gallery is a big doorway button into the next gallery. Nothing is locked and nothing has to be answered — the looking is the work. In the Laws gallery you can also sit on the judge’s bench and rule on three cases, if you like; that part is optional. Every panel and label has a <b>Read to me</b> button if you would rather listen. Each gallery you finish is checked off on your museum map.</p>
+          <p><b>How this works.</b> You are visiting a museum, one gallery at a time. Use the floor-plan strip at the top to see where you are. In each gallery, just <b>scroll down</b> — the wall text and the objects appear in order, stop by stop, like walking a real gallery. Read the wall text, look closely at the objects, and watch for the small <b>pencil flags</b> pinned to the wall — each one names a blank on your paper worksheet and the section it belongs in, right where its answer appears, so you fill it in as you go. At the bottom of every gallery, a <b>Before you walk on</b> list at the doorway mirrors everything that should be filled in by then — a mirror, not a gate — and a big doorway button leads into the next gallery. The museum also remembers where you left off on this device: come back later and a <b>Continue</b> button in the entrance hall takes you straight back to your last gallery and stop. Nothing is locked and nothing has to be answered — the looking is the work. In the Laws gallery you can also sit on the judge’s bench and rule on three cases, if you like; that part is optional. Every panel and label has a <b>Read to me</b> button if you would rather listen. Each gallery you finish is checked off on your museum map.</p>
           </div>
         </div>
         <div>
@@ -1029,7 +1059,7 @@ figure.exhibit .read-btn{margin-top:14px}
           <li><span class="vm-num">V</span><span><b>Kings &amp; Gods</b> — gods, kings, and a society stacked like a ziggurat</span></li>
           <li><span class="vm-num">VI</span><span><b>The Whole Story</b> — four empires, the Egypt contrast, and every object gathered in one room</span></li>
         </ol>
-        <p class="vm-how">In every gallery the visit works the same way: <b>read</b> the wall text, <b>look</b> closely at the objects in the cases, <b>write</b> on your worksheet when a Worksheet Moment appears, then keep scrolling down — and tap the big doorway button at the bottom into the next gallery.</p>
+        <p class="vm-how">In every gallery the visit works the same way: <b>read</b> the wall text, <b>look</b> closely at the objects in the cases, <b>write</b> on your worksheet when a small pencil flag names a blank — each flag sits right where its answer appears — then keep scrolling down — and tap the big doorway button at the bottom into the next gallery.</p>
       </div>
     </div>
     <figure class="exhibit" style="margin-top:52px">
@@ -1082,7 +1112,7 @@ figure.exhibit .read-btn{margin-top:14px}
     <div class="path" id="path"></div>
     <div class="map-foot">
       <h3>How the visit works</h3>
-      <p>Every gallery works the same simple way: <b>read</b> the wall text, <b>look</b> closely at the objects, and when you meet a <b>Worksheet Moment</b>, write a sentence or two <b>on your paper worksheet</b>, in the section it names. Then walk on, through the doorway at the end of the gallery, into the next. Nothing is locked and nothing has to be answered to move on — the looking is the work. What you carry out is not points. It is the whole story — and the ability to say what each of its objects proves.</p>
+      <p>Every gallery works the same simple way: <b>read</b> the wall text, <b>look</b> closely at the objects, and when a small <b>pencil flag</b> names a blank, write <b>on your paper worksheet</b>, in the section it names — each flag sits right where its answer appears. At the end of every gallery, <b>Before you walk on</b> lists everything that should be filled in by then; check it, then walk on, through the doorway, into the next gallery. Nothing is locked and nothing has to be answered to move on — the looking is the work. What you carry out is not points. It is the whole story — and the ability to say what each of its objects proves.</p>
     </div>
   </div>
 </section>
@@ -1516,13 +1546,58 @@ var ROOMS = [
   learned:[]}
 ];
 /* =================== LEARNING-SCIENCE LAYER =================== */
-var WHYQ = {
-  rivers:{title:'Fill in the Gallery I blanks', note:'On your worksheet, fill in the Gallery I blanks: the two rivers, what ‘Mesopotamia’ means, the farming problem the rivers created, how farmers controlled the water, and what a food surplus made possible. Key terms and short phrases, in your own words.', section:'Worksheet §2 — Field Notes'},
-  cities:{title:'Fill in the Gallery II blanks', note:'On your worksheet, fill in the Gallery II blanks: what a city-state is, the two featured city-states, the building at the center of the city, who ruled the city-state, why city-states fought each other, and the Egypt contrast. Key terms and short phrases, in your own words.', section:'Worksheet §2 — Field Notes'},
-  laws:{title:'Work through the five laws', note:'On your worksheet, work through all five laws: for each one, identify who was harmed and what the punishment was. Then answer the pattern question — especially Laws 200 and 202, where rank changes everything.', section:'Worksheet §3 — Law Comparison'},
-  writing:{title:'Fill in the Gallery IV blanks', note:'On your worksheet, fill in the Gallery IV blanks: what writing was invented to keep track of, the tool and the material, the scribes’ number system, Enheduanna (daughter of, high priestess at, first), and one thing writing let people do that memory could not. Key terms and short phrases, in your own words.', section:'Worksheet §2 — Field Notes'},
-  kings:{title:'Fill in the Gallery V blanks', note:'On your worksheet, fill in the Gallery V blanks: the religion type, the hierarchy from top to bottom after the king, and the three roles the temple played in the economy. Key terms and short phrases, in your own words.', section:'Worksheet §2 — Field Notes'},
-  exit:{title:'Fill in the Gallery VI blanks', note:'On your worksheet, fill in the Gallery VI blanks: what came after the Sumerian city-states, what Sargon of Akkad is remembered as the first of, and why empires keep replacing each other here. Key terms and short phrases, in your own words.', section:'Worksheet §2 — Field Notes'}
+/* =================== WORKSHEET BLANKS — flagged where their answers live ===================
+   Every blank on the paper worksheet, mapped to the exact stop (and,
+   for wall text, the exact paragraph) where its answer appears. The
+   walk renders each one as a small pencil flag at that spot; the
+   "Before you walk on" mirror at each gallery's doorway lists the
+   same items again, so the two can never drift apart.
+   step = index into the walked steps (wall / case / judge / decide);
+   para = insert after this paragraph of the wall text;
+   at   = 'insc' (after the five laws), 'beat' (inside the Enheduanna
+          panel), or 'end' (at the foot of the stop). */
+var WS_BLANKS = {
+  rivers:[
+    {sec:'§2 — Field Notes', blank:'the two rivers', step:0, para:1},
+    {sec:'§2 — Field Notes', blank:'what “Mesopotamia” means', step:0, para:1},
+    {sec:'§2 — Field Notes', blank:'the farming problem the rivers created', step:0, para:2},
+    {sec:'§2 — Field Notes', blank:'how farmers controlled the water', step:0, para:2},
+    {sec:'§2 — Field Notes', blank:'what a food surplus made possible', step:0, para:2}
+  ],
+  cities:[
+    {sec:'§2 — Field Notes', blank:'what a city-state is', step:0, para:3},
+    {sec:'§2 — Field Notes', blank:'the two featured city-states', step:0, para:3},
+    {sec:'§2 — Field Notes', blank:'who ruled each city-state', step:0, para:3},
+    {sec:'§2 — Field Notes', blank:'why city-states fought each other', step:0, para:3},
+    {sec:'§2 — Field Notes', blank:'the Egypt contrast', step:0, para:3},
+    {sec:'§2 — Field Notes', blank:'the building at the center of the city', step:0, para:4}
+  ],
+  laws:[
+    {sec:'§3 — Law Comparison', blank:'Law 195 — who was harmed · the punishment', step:0, at:'insc'},
+    {sec:'§3 — Law Comparison', blank:'Law 196 — who was harmed · the punishment', step:0, at:'insc'},
+    {sec:'§3 — Law Comparison', blank:'Law 197 — who was harmed · the punishment', step:0, at:'insc'},
+    {sec:'§3 — Law Comparison', blank:'Law 200 — who was harmed · the punishment', step:0, at:'insc'},
+    {sec:'§3 — Law Comparison', blank:'Law 202 — who was harmed · the punishment', step:0, at:'insc'},
+    {sec:'§3 — Law Comparison', blank:'the pattern question — how rank changes the punishment (Laws 200 & 202)', step:0, at:'end'}
+  ],
+  writing:[
+    {sec:'§2 — Field Notes', blank:'what writing was invented to keep track of', step:0, para:1},
+    {sec:'§2 — Field Notes', blank:'the tool and the material', step:0, para:1},
+    {sec:'§2 — Field Notes', blank:'the scribes’ number system', step:0, at:'end'},
+    {sec:'§2 — Field Notes', blank:'one thing writing let people do that memory could not', step:1, at:'end'},
+    {sec:'§2 — Field Notes', blank:'Explain it — why a priest might sell land in his own name', step:1, at:'end', note:'Sentence starter: “A priest might sell land because ___, and every private sale mattered because whoever controls the surplus ___.”'},
+    {sec:'§2 — Field Notes', blank:'Enheduanna — daughter of ___, high priestess at ___, the first ___', step:3, at:'beat'}
+  ],
+  kings:[
+    {sec:'§2 — Field Notes', blank:'the religion type', step:0, para:1},
+    {sec:'§2 — Field Notes', blank:'the hierarchy, from the top down', step:0, para:3},
+    {sec:'§2 — Field Notes', blank:'the temple’s three roles in the economy', step:0, at:'end'}
+  ],
+  exit:[
+    {sec:'§2 — Field Notes', blank:'what came after the Sumerian city-states', step:0, para:2},
+    {sec:'§2 — Field Notes', blank:'Sargon of Akkad — the first ___', step:0, para:2},
+    {sec:'§2 — Field Notes', blank:'why empires here kept replacing each other', step:0, para:2}
+  ]
 };
 var LAWS_HTML =
   '<div class="law-list">' +
@@ -1633,8 +1708,73 @@ function updateHUD(){
   var t = Object.keys(S.done).length + ' of 6 galleries';
   var hc = $('hud-coll'); if(hc) hc.textContent = t;
   var cc = $('ch-coll'); if(cc) cc.textContent = t;
+  saveVisit();
 }
 function icon(name, cls){ return '<svg class="'+(cls||'')+'" aria-hidden="true"><use href="#i-'+name+'"/></svg>'; }
+
+/* =================== REMEMBERING THE VISIT (this device only) ===================
+   The museum remembers where each student left off, on their own
+   device: the last gallery and stop overall, the last stop visited
+   in each gallery, and which galleries are done. Reopening the
+   page offers a Continue button in the entrance hall; tapping a
+   gallery on the floor-plan rail (or the directory) returns to
+   that gallery's last stop instead of always the top. Stored in
+   localStorage only — nothing leaves the device, and if storage
+   is unavailable the visit simply starts fresh, as before. */
+var VISIT_KEY = 'mesopotamia-visit-v1';
+var visitReady = false;
+var visitPos = { ch:-1, stop:0, stops:{} };
+function loadVisit(){
+  try{
+    var raw = window.localStorage.getItem(VISIT_KEY);
+    if(raw){
+      var v = JSON.parse(raw);
+      if(v && typeof v === 'object'){
+        if(v.done && typeof v.done === 'object'){
+          Object.keys(v.done).forEach(function(k){ if(v.done[k] && ROOMS.some(function(r){ return r.id === k; })) S.done[k] = true; });
+        }
+        if(v.stops && typeof v.stops === 'object') visitPos.stops = v.stops;
+        if(typeof v.ch === 'number' && v.ch >= 0 && v.ch < ROOMS.length){
+          visitPos.ch = v.ch;
+          visitPos.stop = Math.max(0, v.stop | 0);
+        }
+      }
+    }
+  }catch(e){ /* storage unavailable — the visit starts fresh */ }
+  visitReady = true;
+}
+function saveVisit(){
+  if(!visitReady) return;
+  try{
+    window.localStorage.setItem(VISIT_KEY, JSON.stringify({ done:S.done, stops:visitPos.stops, ch:visitPos.ch, stop:visitPos.stop }));
+  }catch(e){ /* storage unavailable — carry on without it */ }
+}
+function recordStop(){
+  var room = $('screen-room');
+  if(!room || !room.classList.contains('on')) return;
+  visitPos.ch = S.ch;
+  visitPos.stop = curBayIdx;
+  visitPos.stops[ROOMS[S.ch].id] = curBayIdx;
+  saveVisit();
+}
+/* The stop a gallery reopens at: its last visited stop, unless the
+   gallery is finished — a finished gallery is re-walked from the top. */
+function resumeStopFor(idx){
+  var r = ROOMS[idx];
+  if(!r || S.done[r.id]) return 0;
+  var s = visitPos.stops[r.id];
+  return (typeof s === 'number' && s > 0) ? s : 0;
+}
+function stopName(chIdx, bayIdx){
+  var steps = roomSteps(ROOMS[chIdx]);
+  if(bayIdx >= steps.length) return 'the end of the gallery';
+  var st = steps[bayIdx];
+  if(st.k === 'wall') return st.title || 'the wall text';
+  if(st.k === 'case') return st.title || (st.art && st.art.name) || 'an object in its case';
+  if(st.k === 'judge') return 'On the bench — Case ' + st.n + ' of 3';
+  if(st.k === 'decide') return 'You Decide — ' + st.title;
+  return 'a stop in the gallery';
+}
 function shuffle(arr){ var a=arr.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
 
@@ -1662,7 +1802,7 @@ function renderPlan(){
         '<span class="node-skills">' + c.skills.map(function(s){ return '<span class="skill-chip">'+s+'</span>'; }).join('') + '</span>' +
         '<span class="node-status">' + statusHtml + '</span>' +
       '</span>';
-    (function(idx){ b.addEventListener('click', function(){ startRoom(idx, true); }); })(i);
+    (function(idx){ b.addEventListener('click', function(){ startRoom(idx, true, resumeStopFor(idx)); }); })(i);
     path.appendChild(b);
   });
   var doneCount = Object.keys(S.done).length;
@@ -1670,7 +1810,14 @@ function renderPlan(){
   var ptEl = $('plan-tablet');
   if(ptEl){ ptEl.innerHTML = museumSVG(doneIdxs(), -1); var capEl = $('plan-tablet-cap'); if(capEl) capEl.textContent = doneCount===0 ? 'Your museum map — no gallery visited yet.' : (doneCount>=6 ? 'Your museum map — all six galleries visited.' : 'Your museum map — ' + doneCount + ' of 6 galleries visited.'); }
   var nc = nextIdx>=0 ? ROOMS[nextIdx] : null;
-  if(nc){
+  var resumeRoom = (visitPos.ch >= 0 && !S.done[ROOMS[visitPos.ch].id] && (visitPos.stop > 0 || visitPos.ch > 0)) ? ROOMS[visitPos.ch] : null;
+  if(resumeRoom){
+    $('cc-label').textContent = 'Your visit · pick up where you left off';
+    $('cc-title').textContent = resumeRoom.name;
+    $('cc-sub').textContent = 'You left off in Gallery ' + ROMAN[visitPos.ch] + ' at Stop ' + (visitPos.stop + 1) + ' of ' + (roomSteps(resumeRoom).length + 1) + ' — ' + stopName(visitPos.ch, visitPos.stop) + '. Continue takes you straight back to that stop.';
+    $('btn-continue').innerHTML = 'Continue ' + icon('arrow');
+    $('btn-continue').onclick = function(){ startRoom(visitPos.ch, true, visitPos.stop); };
+  } else if(nc){
     $('cc-label').textContent = doneCount===0 ? 'Your visit · the first gallery' : 'Your visit · the next gallery';
     $('cc-title').textContent = nc.name;
     $('cc-sub').textContent = nc.sub;
@@ -1687,13 +1834,18 @@ function renderPlan(){
 }
 
 /* =================== ROOM ENGINE =================== */
-function startRoom(i, viaDoor){
+function startRoom(i, viaDoor, targetStop){
   var go = function(){
     S.ch = i; S.step = 0;
     S.chFirst = 0; S.chTotal = 0;
     $('screen-room').setAttribute('data-room', ROOMS[i].id);
     show('screen-room');
     renderRoom();
+    if(targetStop && targetStop > 0){
+      /* Returning to where this gallery was left off: land on the
+         remembered stop once the room has been laid out. */
+      setTimeout(function(){ scrollToBay(targetStop, true); }, 120);
+    }
   };
   if(viaDoor){ passDoorway(ROOMS[i].name, go); } else { go(); }
 }
@@ -1741,7 +1893,7 @@ function buildRail(){
     b.setAttribute('aria-label', 'Gallery ' + (i+1) + ': ' + r.name + (i === S.ch ? ' (you are here)' : ''));
     b.setAttribute('aria-current', i === S.ch ? 'true' : 'false');
     b.innerHTML = '<span class="rs-num">' + ROMAN[i] + '</span><span class="rs-name">' + r.name + '</span>';
-    (function(idx){ b.addEventListener('click', function(){ if(idx !== S.ch) startRoom(idx, true); }); })(i);
+    (function(idx){ b.addEventListener('click', function(){ if(idx !== S.ch) startRoom(idx, true, resumeStopFor(idx)); }); })(i);
     rail.appendChild(b);
   });
 }
@@ -1763,11 +1915,11 @@ function buildDots(){
   }
   buildRail();
 }
-function scrollToBay(i){
+function scrollToBay(i, instant){
   if(!bays.length) return;
   i = Math.max(0, Math.min(bays.length - 1, i));
-  curBayIdx = i; buildDots();
-  bays[i].scrollIntoView({behavior:'smooth', block:'start'});
+  curBayIdx = i; buildDots(); recordStop();
+  bays[i].scrollIntoView({behavior: instant ? 'auto' : 'smooth', block:'start'});
 }
 function approachUpdate(){
   rafPending = false;
@@ -1777,7 +1929,7 @@ function approachUpdate(){
   bays.forEach(function(b, i){
     if(b.getBoundingClientRect().top <= probe) best = i;
   });
-  if(best !== curBayIdx){ curBayIdx = best; buildDots(); }
+  if(best !== curBayIdx){ curBayIdx = best; buildDots(); recordStop(); }
 }
 window.addEventListener('scroll', function(){
   if(!$('screen-room') || !$('screen-room').classList.contains('on')) return;
@@ -1842,7 +1994,7 @@ function renderRoom(){
   cur = null;
   S.step = 0;
   refreshBays();
-  curBayIdx = 0; buildDots();
+  curBayIdx = 0; buildDots(); recordStop();
   window.scrollTo({top:0});
   updateSegs();
   if('IntersectionObserver' in window){
@@ -1908,7 +2060,7 @@ function renderCompletion(c, bay){
     '<p>' + (isFinal
       ? 'From the first riverbank to the last empire — the whole arc of the first civilization, walked gallery by gallery under one roof. What you carry out is the map below — every gallery visited — and the worksheet you filled in along the way.'
       : c.note) + '</p></div>' + compTabletHtml +
-    wsCompleteHtml + learnedHtml + collectsHtml + finalExtra + doorQHtml +
+    mirrorHTML(c) + wsCompleteHtml + learnedHtml + collectsHtml + finalExtra + doorQHtml +
     '<div class="bay-end-btns">' + btns + '</div></div>';
   var nb = bay.querySelector('.cb-next');
   if(nb) nb.addEventListener('click', function(){ S.done[c.id] = true; updateHUD(); startRoom(S.ch + 1, true); });
@@ -2106,6 +2258,58 @@ function wsNoteHTML(section, title, body){
   return '<div class="ws-moment ws-note"><div class="ws-head"><span class="ws-badge">Worksheet Moment</span><span class="ws-section">' + section + '</span></div>' +
     '<h4 class="ws-title">' + title + '</h4><div class="ws-body">' + body + '</div></div>';
 }
+/* ---------- WORKSHEET PENCIL FLAGS (one per blank, at its answer) ---------- */
+function flagHTML(it){
+  return '<div class="ws-flag">' + icon('pen') + '<span class="wf-txt"><b>Worksheet ' + it.sec + '</b> · <span class="wf-blank">' + it.blank + '</span></span></div>';
+}
+function flagsHTML(items){
+  return items && items.length ? '<div class="ws-flags">' + items.map(flagHTML).join('') + '</div>' : '';
+}
+function flagsFor(roomId, stepIdx, kind){
+  return (WS_BLANKS[roomId] || []).filter(function(it){ return it.step === stepIdx && it.at === kind; });
+}
+function paraFlagsFor(roomId, stepIdx){
+  return (WS_BLANKS[roomId] || []).filter(function(it){ return it.step === stepIdx && !!it.para; });
+}
+/* Splice the flags for a wall step into its body HTML, each group
+   landing immediately after the paragraph that holds its answer. */
+function insertParaFlags(html, items){
+  if(!items.length) return html;
+  var byPara = {};
+  items.forEach(function(it){ (byPara[it.para] = byPara[it.para] || []).push(it); });
+  var parts = html.split('</p>'), out = '';
+  for(var i = 0; i < parts.length; i++){
+    out += parts[i];
+    if(i < parts.length - 1){
+      out += '</p>';
+      if(byPara[i + 1]) out += flagsHTML(byPara[i + 1]);
+    }
+  }
+  return out;
+}
+/* ---------- BEFORE YOU WALK ON — the mirror at the doorway ----------
+   Lists, from the same WS_BLANKS table the flags are drawn from,
+   everything that should be filled in on the paper worksheet by
+   the end of this gallery. A mirror, not a gate: nothing here is
+   checked, and the doorway buttons below it work either way. */
+function mirrorHTML(c){
+  var items = WS_BLANKS[c.id] || [];
+  if(!items.length) return '';
+  var groups = '', curSec = null;
+  items.forEach(function(it){
+    if(it.sec !== curSec){
+      if(curSec) groups += '</ul>';
+      groups += '<p class="wo-sec">Worksheet ' + it.sec + '</p><ul class="wo-list">';
+      curSec = it.sec;
+    }
+    groups += '<li>' + icon('pen') + '<span>' + it.blank + (it.note ? '<span class="wo-note-inline">' + it.note + '</span>' : '') + '</span></li>';
+  });
+  if(curSec) groups += '</ul>';
+  return '<div class="walk-on"><h3>Before you walk on</h3>' +
+    '<p class="wo-intro">A mirror, not a gate — nothing here is checked, and you can walk on either way. By this doorway, these blanks on your paper worksheet should be filled in. Key terms and short phrases, in your own words:</p>' +
+    groups +
+    '<p class="wo-back">A blank still empty? Scroll back up — a small pencil flag marks the exact stop where its answer appears.</p></div>';
+}
 function updateSegs(){
   var c = ROOMS[S.ch];
   $('ch-over').textContent = 'Gallery ' + c.num + ' of 6';
@@ -2215,10 +2419,6 @@ function renderLawsWall(st){
   var facts = (st.facts||[]).map(function(f){
     return '<div class="fact"><h4>'+f.t+'</h4><p>'+f.d+'</p></div>';
   }).join('');
-  var why = WHYQ[c.id];
-  var whyHtml = wsNoteHTML(why.section, why.title,
-    '<p>' + why.note + '</p>' +
-    '<p>Written? Keep reading — tap <b>Continue</b> below whenever you are ready.</p>');
   var lc = st.leadCase;
   var sourceHtml = st.source ? '<div class="source-note"><span class="src-tag">Primary Source</span><em>'+st.source.split(' — ')[0]+'</em>' + (st.source.split(' — ')[1] ? '<br/><span style="color:var(--dim); font-size:13px">— ' + st.source.split(' — ')[1] + '</span>' : '') + '</div>' : '';
   cur.innerHTML =
@@ -2231,10 +2431,11 @@ function renderLawsWall(st){
       (lc.note ? '<div class="stele-note">' + lc.note + '</div>' : '') +
       '<p class="insc-head">Carved in the stone — the five laws</p>' +
       INSCRIPTIONS_HTML +
+      flagsHTML(flagsFor(c.id, S.step, 'insc')) +
     '</div>' +
     '<div class="teach-body no-drop" style="max-width:720px">' + (st.body2 || '') +
     (st.worked ? WORKED_HTML : '') + sourceHtml + '</div>' +
-    '<div class="fact-stack laws-facts">' + facts + '</div>' + whyHtml + '</div>';
+    '<div class="fact-stack laws-facts">' + facts + '</div>' + flagsHTML(flagsFor(c.id, S.step, 'end')) + '</div>';
   primaryBtn('Continue', nextStep);
   var rv = document.getElementById('stele-reveal');
   if(rv){
@@ -2262,6 +2463,7 @@ function renderBeat(st){
     '<p class="beat-dates">c. 2285 BCE · High Priestess of Nanna, moon god of Ur</p>' +
     readBtnHTML(st.audio) +
     '<div class="beat-body">' + st.body + '</div>' +
+    flagsHTML(flagsFor(ROOMS[S.ch].id, S.step, 'beat')) +
     '<div class="beat-stat"><span class="beat-num">500</span><span class="beat-cap">years after her death, scribal students were still copying her hymns as school exercises — one woman’s words, carried in the hand of every scribe in Sumer</span></div></div>' +
     (facts ? '<div class="beat-facts">' + facts + '</div>' : '') + '</div>';
   primaryBtn('Continue', nextStep);
@@ -2274,30 +2476,18 @@ function renderWall(st){
   var facts = (st.facts||[]).map(function(f){
     return '<div class="fact"><h4>'+f.t+'</h4><p>'+f.d+'</p></div>';
   }).join('');
-  var why = WHYQ[c.id];
-  var whyHtml = '';
-  if(why && S.step===0){
-    whyHtml = wsNoteHTML(why.section, why.title,
-      '<p>' + why.note + '</p>' +
-      '<p>Written? Keep reading — tap <b>Continue</b> below whenever you are ready.</p>');
-  }
-  var why2Html = '';
-  if(c.id==='writing' && S.step===0){
-    why2Html = wsNoteHTML('Worksheet §2 — Field Notes', 'Explain it — why? Why would a priest sell land instead of the temple just keeping it?',
-      '<p>Feel the stakes before you answer. For centuries the temple had owned the land, stored the surplus, lent the seed and employed the city — <b>whoever controls the surplus controls the city</b>. Yet here is Ushumgal, a priest, selling land in <b>his own name</b>, before witnesses — his stone waits on the next piece. Answer <b>on your worksheet, in §2 — Field Notes</b>: what does a man gain by owning land himself that temple service can never give him — and what does the temple lose, sale by sale?</p>' +
-      '<p class="ws-starter"><span>Sentence starter — begin your writing with</span>&ldquo;A priest might sell land because ___, and every private sale mattered because whoever controls the surplus ___.&rdquo;</p>' +
-      '<p>Written? Keep reading — tap <b>Continue</b> below whenever you are ready.</p>');
-  }
+  var bodyHtml = insertParaFlags(st.body, paraFlagsFor(c.id, S.step));
+  var endFlags = flagsHTML(flagsFor(c.id, S.step, 'end'));
   cur.innerHTML =
     '<div class="step">' + (S.step===0 ? mastheadHTML(c) : '') + stepHead(st.tag, 'tag-learn') +
     '<h2 class="big-q">' + st.title + '</h2>' + readBtnHTML(st.audio) +
     (st.leadCase ? exhibitHTML(st.leadCase, st.leadCase.tall) : '') +
     (st.viz ? vizHTML(st.viz) : '') +
-    '<div class="teach-grid"><div class="teach-body' + (st.noFirst ? ' no-drop' : '') + '">' + st.body +
+    '<div class="teach-grid"><div class="teach-body' + (st.noFirst ? ' no-drop' : '') + '">' + bodyHtml +
     (st.laws ? LAWS_HTML : '') + (st.body2 || '') +
     (st.worked ? WORKED_HTML : '') +
     (st.source ? '<div class="source-note"><span class="src-tag">Primary Source</span><em>'+st.source.split(' — ')[0]+'</em>' + (st.source.split(' — ')[1] ? '<br/><span style="color:var(--dim); font-size:13px">— ' + st.source.split(' — ')[1] + '</span>' : '') + '</div>' : '') +
-    '</div><div class="fact-stack">' + facts + '</div></div>' + whyHtml + why2Html + '</div>';
+    '</div><div class="fact-stack">' + facts + '</div></div>' + endFlags + '</div>';
   primaryBtn('Continue', nextStep);
 }
 
@@ -2307,7 +2497,8 @@ function renderCase(st){
   var arts = [st.art, st.art2, st.art3].filter(Boolean);
   cur.innerHTML = '<div class="step">' + stepHead(st.tag, 'tag-learn') +
     (st.title ? '<h2 class="big-q" style="font-size:clamp(23px,4vw,31px)">' + st.title + '</h2>' : '') +
-    arts.map(function(a){ return exhibitHTML(a, a.tall); }).join('') + '</div>';
+    arts.map(function(a){ return exhibitHTML(a, a.tall); }).join('') +
+    flagsHTML(flagsFor(c.id, S.step, 'end')) + '</div>';
   primaryBtn(st.btn || 'Continue', nextStep);
 }
 
@@ -2618,8 +2809,25 @@ function wireLadder(hints){
 }
 
 /* =================== WIRING =================== */
+loadVisit();
 var introTabletEl = $('intro-tablet');
-if(introTabletEl) introTabletEl.innerHTML = museumSVG([], -1);
+if(introTabletEl) introTabletEl.innerHTML = museumSVG(doneIdxs(), -1);
+/* The entrance-hall Continue button: shown only when this device
+   holds an unfinished visit to pick up, and it names the gallery
+   and stop it returns to. */
+var resumeBtn = $('btn-resume'), resumeNote = $('resume-note');
+if(resumeBtn && visitPos.ch >= 0 && !S.done[ROOMS[visitPos.ch].id] && (visitPos.stop > 0 || visitPos.ch > 0)){
+  var rr = ROOMS[visitPos.ch];
+  var totalStops = roomSteps(rr).length + 1;
+  resumeBtn.classList.remove('hidden');
+  resumeBtn.innerHTML = 'Continue — Gallery ' + ROMAN[visitPos.ch] + ' · Stop ' + (visitPos.stop + 1) + ' ' + icon('arrow');
+  resumeBtn.setAttribute('aria-label', 'Continue your visit — Gallery ' + ROMAN[visitPos.ch] + ', ' + rr.name + ', stop ' + (visitPos.stop + 1) + ' of ' + totalStops);
+  (function(chIdx, stopIdx){ resumeBtn.addEventListener('click', function(){ startRoom(chIdx, true, stopIdx); }); })(visitPos.ch, visitPos.stop);
+  if(resumeNote){
+    resumeNote.classList.remove('hidden');
+    resumeNote.textContent = 'Welcome back. You left off in Gallery ' + ROMAN[visitPos.ch] + ' — ' + rr.name + ', at Stop ' + (visitPos.stop + 1) + ' of ' + totalStops + ': ' + stopName(visitPos.ch, visitPos.stop) + '. Continue takes you straight back there.';
+  }
+}
 $('btn-begin').addEventListener('click', function(){ renderPlan(); show('screen-plan'); });
 $('btn-how').addEventListener('click', function(){
   var panel = $('how-panel'), opening = panel.classList.contains('hidden');
